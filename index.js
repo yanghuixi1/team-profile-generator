@@ -1,29 +1,43 @@
 const inquirer = require("inquirer");
-const fs = require("fs");
+const renderTeamTemplate = require("./src/template");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+const templateFile = "./src/template.html";
+const outputFile = "./dist/index.html";
+
 class Team {
-  constructor(manager) {
-    this.manager = manager;
+  constructor(managerAnswers) {
+    this.manager = new Manager(
+      managerAnswers.name,
+      managerAnswers.id,
+      managerAnswers.email,
+      managerAnswers.officeNumber
+    );
     this.engineers = [];
     this.interns = [];
   }
 
-  addEngineer(engineer) {
-    this.engineers.push(engineer);
+  addEngineer(engineerAnswers) {
+    let currEngineer = new Engineer(
+      engineerAnswers.name,
+      engineerAnswers.id,
+      engineerAnswers.email,
+      engineerAnswers.githubUsername
+    );
+    this.engineers.push(currEngineer);
   }
 
-  addIntern(intern) {
-    this.interns.push(intern);
+  addIntern(internAnswers) {
+    let currIntern = new Intern(
+      internAnswers.name,
+      internAnswers.id,
+      internAnswers.email,
+      internAnswers.currentSchool
+    );
+    this.interns.push(currIntern);
   }
-}
-
-function renderTeamTemplate(team) {
-  console.log(team.manager);
-  console.log(team.engineers);
-  console.log(team.interns);
 }
 
 function askContinueQuestion(team) {
@@ -43,7 +57,7 @@ function askContinueQuestion(team) {
       } else if (answers.nextStep == "Intern") {
         askInternQuestions(team);
       } else if (answers.nextStep == "Finish") {
-        renderTeamTemplate(team);
+        renderTeamTemplate(templateFile, outputFile, team);
       }
     });
 }
@@ -72,8 +86,8 @@ function askManagerQuestions() {
         name: "officeNumber",
       },
     ])
-    .then((manager) => {
-      const team = new Team(manager);
+    .then((managerAnswers) => {
+      const team = new Team(managerAnswers);
       askContinueQuestion(team);
     });
 }
@@ -102,8 +116,8 @@ function askEngineerQuestions(team) {
         name: "githubUsername",
       },
     ])
-    .then((engineer) => {
-      team.addEngineer(engineer);
+    .then((engineerAnswers) => {
+      team.addEngineer(engineerAnswers);
       askContinueQuestion(team);
     });
 }
@@ -132,8 +146,8 @@ function askInternQuestions(team) {
         name: "currentSchool",
       },
     ])
-    .then((intern) => {
-      team.addIntern(intern);
+    .then((internAnswers) => {
+      team.addIntern(internAnswers);
       askContinueQuestion(team);
     });
 }
