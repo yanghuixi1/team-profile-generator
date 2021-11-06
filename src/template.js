@@ -6,7 +6,7 @@ function makeManagerCard(manager) {
       <header class="card-header">
         ${manager.getName()}
         <p>
-          ${manager.getRole()}
+        <i class="fas fa-coffee"></i>&nbsp${manager.getRole()}
         </p>
       </header>
       <p>ID: ${manager.getId()}</p>
@@ -21,7 +21,7 @@ function makeEngineerCard(engineer) {
       <header class="card-header">
         ${engineer.getName()}
         <p>
-          ${engineer.getRole()}
+        <i class="fas fa-glasses"></i>&nbsp${engineer.getRole()}
         </p>
       </header>
       <p>ID: ${engineer.getId()}</p>
@@ -36,7 +36,7 @@ function makeInternCard(intern) {
       <header class="card-header">
         ${intern.getName()}
         <p>
-          ${intern.getRole()}
+        <i class="fas fa-user-graduate"></i>&nbsp${intern.getRole()}
         </p>
       </header>
       <p>ID: ${intern.getId()}</p>
