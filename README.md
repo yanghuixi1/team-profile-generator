@@ -21,3 +21,5 @@ Create an issue or contact me at the details below
 ## Questions
 Check out my [GitHub profile](https://github.com/yanghuixi1)!
 If you have any questions or concerns, feel free to email me at <yanghui.xi1@gmail.com>
+## Walkthrough Video
+https://drive.google.com/file/d/1ZjuZKLWpGl3fb1cMH8T8a4KUxav2vGuc/view?usp=sharing
